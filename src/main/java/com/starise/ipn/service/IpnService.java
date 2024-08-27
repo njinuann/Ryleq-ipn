@@ -45,15 +45,17 @@ public class IpnService {
     private final AccountService accountService;
     private final TenantIdRepository tenantIdRepository;
     private final TenantRepository tenantRepository;
+    private final  ProcessAlert processAlert;
 
     AccountsDto accountEntity = new AccountsDto();
     private RestTemplate restTemplate;
 
     @Autowired
-    public IpnService(AccountService accountService, TenantIdRepository tenantIdRepository, TenantRepository tenantRepository) {
+    public IpnService(AccountService accountService, TenantIdRepository tenantIdRepository, TenantRepository tenantRepository,ProcessAlert processAlert) {
         this.accountService = accountService;
         this.tenantIdRepository = tenantIdRepository;
         this.tenantRepository = tenantRepository;
+        this.processAlert = processAlert;
     }
 
     @Autowired
@@ -373,7 +375,7 @@ public class IpnService {
     }
 
     public TenantIdEntity postWithIdNo(MpesaRequest mpesaRequest) throws Exception {
-        ProcessAlert processAlert = new ProcessAlert();
+
         AlertRequest alertRequest = new AlertRequest();
         String basicAuth = "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes());
 
@@ -385,6 +387,10 @@ public class IpnService {
 
         String clientNo = mpesaRequest.getBillRefNumber();
         String bankCode = mpesaRequest.getBusinessShortCode();
+        String mpesaReceiptNo = mpesaRequest.getTransID();
+        String mpesaSender = mpesaRequest.getFirstName();
+        String mpesaTransTime = formatMpesaDate(mpesaRequest.getTransTime());
+        BigDecimal mpesaAmount = new BigDecimal(mpesaRequest.getTransAmount());
 
         long clientCode = 0L;
         String accountType = "";
@@ -460,17 +466,17 @@ public class IpnService {
                     String statusValue = jsonObject.getJSONObject("status").optString("value");
                     boolean active = jsonObject.optBoolean("active");
                     String displayName = jsonObject.optString("displayName");
-                    String mobileNo = jsonObject.optString("mobileNo");
+                    String mobileNo = formatMobileNumber(jsonObject.optString("mobileNo"));
                     String externalId = jsonObject.optString("externalId");
 
                     //set alert details
                     alertRequest.setAccountNo(accountNo);
                     alertRequest.setMobileNo(mobileNo);
-                    alertRequest.setReceipt(mpesaRequest.getTransID());
+                    alertRequest.setReceipt(mpesaReceiptNo);
                     alertRequest.setClientName(displayName);
-                    alertRequest.setSenderName(mpesaRequest.getFirstName());
-                    alertRequest.setAmount(new BigDecimal(mpesaRequest.getTransAmount()));
-                    alertRequest.setTxnDate(formatMpesaDate(mpesaRequest.getTransTime()));
+                    alertRequest.setSenderName(mpesaSender);
+                    alertRequest.setAmount(mpesaAmount);
+                    alertRequest.setTxnDate(mpesaTransTime);
 
 
                     tenantDto.setId(id);
@@ -482,7 +488,7 @@ public class IpnService {
                         AccountsDto tenant = getAcounts(tenatId, accountType);
 
                         String txnDate = new SimpleDateFormat("dd MMM yyyy").format(new Date());
-                        if (isLoan(accountType)) {
+                        if (isLoan(tenant.getProductPrefix())) {
                             alertRequest.setMessageType("LN");
                             String loanUrlEndpoint = "loans/" + tenant.getId() + "/transactions?command=repayment";
                             logger.info("urlEndpoint::=> {}", exernalUrl + loanUrlEndpoint);
@@ -647,6 +653,16 @@ public class IpnService {
         LocalDateTime dateTime = LocalDateTime.parse(timestamp, inputFormatter);
         String formattedDate = dateTime.format(outputFormatter);
         return formattedDate;
+    }
+
+    public String formatMobileNumber(String mobileNumber) {
+        if (mobileNumber.startsWith("+254")) {
+            return mobileNumber.substring(1); // Remove the "+" from the beginning
+        } else if (mobileNumber.startsWith("0")) {
+            return "254" + mobileNumber.substring(1); // Replace the leading "0" with "254"
+        } else {
+            return mobileNumber; // Return the number as is if no special case applies
+        }
     }
 
     public void handleIpnRequest(MpesaRequest mpesaRequest, String status) {
