@@ -1,0 +1,98 @@
+2024-07-14 14:08:56 - Starting MpesaIpnApplicationTests using Java 1.8.0_202 on NJINUS with PID 20652 (started by Dell in C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn)
+2024-07-14 14:08:56 - Running with Spring Boot v2.7.18, Spring v5.3.31
+2024-07-14 14:08:56 - No active profile set, falling back to 1 default profile: "default"
+2024-07-14 14:08:57 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14 14:08:57 - Finished Spring Data repository scanning in 105 ms. Found 2 JPA repository interfaces.
+2024-07-14 14:08:58 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14 14:08:59 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-07-14 14:08:59 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-07-14 14:08:59 - HikariPool-1 - Starting...
+2024-07-14 14:09:03 - HikariPool-1 - Start completed.
+2024-07-14 14:09:03 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-07-14 14:09:21 - Starting MpesaIpnApplication using Java 1.8.0_202 on NJINUS with PID 20888 (C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn\target\classes started by Dell in C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn)
+2024-07-14 14:09:21 - No active profile set, falling back to 1 default profile: "default"
+2024-07-14 14:09:21 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-14 14:09:21 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-14 14:09:22 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14 14:09:23 - Finished Spring Data repository scanning in 107 ms. Found 2 JPA repository interfaces.
+2024-07-14 14:09:25 - Tomcat initialized with port(s): 3900 (http)
+2024-07-14 14:09:25 - Initializing ProtocolHandler ["http-nio-3900"]
+2024-07-14 14:09:25 - Starting service [Tomcat]
+2024-07-14 14:09:25 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2024-07-14 14:09:25 - Initializing Spring embedded WebApplicationContext
+2024-07-14 14:09:25 - Root WebApplicationContext: initialization completed in 4209 ms
+2024-07-14 14:09:26 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14 14:09:26 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-07-14 14:09:26 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-07-14 14:09:26 - HikariPool-1 - Starting...
+2024-07-14 14:09:30 - HikariPool-1 - Start completed.
+2024-07-14 14:09:30 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-07-14 14:09:49 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-14 14:09:49 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:09:51 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-14 14:09:53 - Started MpesaIpnApplicationTests in 58.165 seconds (JVM running for 60.24)
+2024-07-14 14:09:53 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:09:53 - HikariPool-1 - Shutdown initiated...
+2024-07-14 14:09:53 - HikariPool-1 - Shutdown completed.
+2024-07-14 14:10:17 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-14 14:10:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:10:19 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-14 14:10:19 - LiveReload server is running on port 35729
+2024-07-14 14:10:19 - Starting ProtocolHandler ["http-nio-3900"]
+2024-07-14 14:10:19 - Tomcat started on port(s): 3900 (http) with context path ''
+2024-07-14 14:10:19 - Started MpesaIpnApplication in 59.734 seconds (JVM running for 61.145)
+2024-07-14 14:12:09 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:12:09 - HikariPool-1 - Shutdown initiated...
+2024-07-14 14:12:09 - HikariPool-1 - Shutdown completed.
+2024-07-14 14:12:20 - Starting MpesaIpnApplication using Java 1.8.0_202 on NJINUS with PID 16192 (C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn\target\classes started by Dell in C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn)
+2024-07-14 14:12:20 - No active profile set, falling back to 1 default profile: "default"
+2024-07-14 14:12:20 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-14 14:12:20 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-14 14:12:22 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14 14:12:22 - Finished Spring Data repository scanning in 91 ms. Found 2 JPA repository interfaces.
+2024-07-14 14:12:24 - Tomcat initialized with port(s): 3900 (http)
+2024-07-14 14:12:24 - Initializing ProtocolHandler ["http-nio-3900"]
+2024-07-14 14:12:24 - Starting service [Tomcat]
+2024-07-14 14:12:24 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2024-07-14 14:12:24 - Initializing Spring embedded WebApplicationContext
+2024-07-14 14:12:24 - Root WebApplicationContext: initialization completed in 3698 ms
+2024-07-14 14:12:25 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14 14:12:25 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-07-14 14:12:25 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-07-14 14:12:25 - HikariPool-1 - Starting...
+2024-07-14 14:12:29 - HikariPool-1 - Start completed.
+2024-07-14 14:12:29 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-07-14 14:13:16 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-14 14:13:16 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:13:16 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ipnController': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [com.starise.ipn.controller.IpnController] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@7c714a8d]
+2024-07-14 14:13:16 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:13:16 - HikariPool-1 - Shutdown initiated...
+2024-07-14 14:13:16 - HikariPool-1 - Shutdown completed.
+2024-07-14 14:14:26 - Starting MpesaIpnApplication using Java 1.8.0_202 on NJINUS with PID 21656 (C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn\target\classes started by Dell in C:\Users\Dell\Documents\NjinuDev\Java 8\MpesaIpn)
+2024-07-14 14:14:26 - No active profile set, falling back to 1 default profile: "default"
+2024-07-14 14:14:26 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-14 14:14:26 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-14 14:14:27 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-14 14:14:28 - Finished Spring Data repository scanning in 76 ms. Found 2 JPA repository interfaces.
+2024-07-14 14:14:30 - Tomcat initialized with port(s): 3900 (http)
+2024-07-14 14:14:30 - Initializing ProtocolHandler ["http-nio-3900"]
+2024-07-14 14:14:30 - Starting service [Tomcat]
+2024-07-14 14:14:30 - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2024-07-14 14:14:30 - Initializing Spring embedded WebApplicationContext
+2024-07-14 14:14:30 - Root WebApplicationContext: initialization completed in 3469 ms
+2024-07-14 14:14:30 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-14 14:14:30 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-07-14 14:14:31 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-07-14 14:14:31 - HikariPool-1 - Starting...
+2024-07-14 14:14:35 - HikariPool-1 - Start completed.
+2024-07-14 14:14:35 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-07-14 14:15:22 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-14 14:15:22 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:15:23 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-14 14:15:24 - LiveReload server is running on port 35729
+2024-07-14 14:15:24 - Starting ProtocolHandler ["http-nio-3900"]
+2024-07-14 14:15:24 - Tomcat started on port(s): 3900 (http) with context path ''
+2024-07-14 14:15:24 - Started MpesaIpnApplication in 58.96 seconds (JVM running for 60.256)
+2024-07-14 14:15:30 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-14 14:15:30 - HikariPool-1 - Shutdown initiated...
+2024-07-14 14:15:30 - HikariPool-1 - Shutdown completed.

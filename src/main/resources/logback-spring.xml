@@ -1,0 +1,20 @@
+<configuration>
+    <property name="LOG_FILE" value="logs/events.log"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} - %msg%n"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_FILE}</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="com.starise.ipn.MpesaIpn" level="debug" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+</configuration>
