@@ -112,12 +112,12 @@ public class ProcessAlert {
         String savingsTemplate = "Dear {CLIENTNAME}, we have received your savings deposit of {CURRENCYCODE} {AMOUNT} from {SENDER} at {TXNDATE}. Thank you";
         String loanReminderTemplate = "Dear {CLIENTNAME}, Your loan of {CURRENCYCODE} {AMOUNT} will be due on {TXNDATE}. Please repay to avoid penalties";
 
-        if (!smsTypeCode.equalsIgnoreCase("SV")) {
-            return repaymentTemplate;
+        if (smsTypeCode.equalsIgnoreCase("SV")) {
+            return savingsTemplate;
         } else if (!smsTypeCode.equalsIgnoreCase("LD")) {
             return loanReminderTemplate;
         } else {
-            return savingsTemplate;
+            return repaymentTemplate;
         }
     }
 
