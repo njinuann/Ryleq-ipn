@@ -474,12 +474,6 @@ public class IpnService {
 
 
                     tenantDto.setId(id);
-                    System.out.println("Account No: " + accountNo);
-                    System.out.println("Status Value: " + statusValue);
-                    System.out.println("Active: " + active);
-                    System.out.println("Display Name: " + displayName);
-                    System.out.println("Mobile No: " + mobileNo);
-                    System.out.println("External Id: " + externalId);
 
                     if (!active) {
                         tenantDto.setId(0L);
@@ -556,7 +550,7 @@ public class IpnService {
                             ObjectMapper loanObjectMapper = new ObjectMapper();
                             String jsonBody = loanObjectMapper.writeValueAsString(requestBody);
 
-                            logger.info("Mpesa Request to CBS::=> {}", jsonBody);
+                            logger.info("Loan Request to CBS::=> {}", jsonBody);
 
                             RequestBody body = RequestBody.create(jsonBody, MediaType.parse("application/json"));
                             Request loanRequest = new Request.Builder()
@@ -577,23 +571,21 @@ public class IpnService {
                                 if (processAlert.sendAlert(alertRequest)) {
                                     logger.info("saving SMS sent to::=> {}", alertRequest.getMobileNo());
                                 }
-
-
                             }
                         }
-                        logger.info("tenantDto response to CBS::=> {}", tenantDto.toString());
+                        logger.info("tenantDto to CBS::=> {}", tenantDto.toString());
                     }
                 } catch (JSONException | NumberFormatException | IOException e) {
                     tenantDto.setId(0L);
-                    //logger.error("No tenant Found " + ex.getMessage());
-                    e.printStackTrace();
                     handleIpnRequest(mpesaRequest, "F");
+                    logger.error("No tenant Found {}", e.getMessage());
+
                 }
 
             } catch (Exception ex) {
                 tenantDto.setId(0L);
-                ex.printStackTrace();
                 handleIpnRequest(mpesaRequest, "F");
+                logger.error("Main error {}", ex.getMessage());
             }
 
         } else {

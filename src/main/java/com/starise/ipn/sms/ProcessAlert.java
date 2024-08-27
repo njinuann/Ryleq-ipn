@@ -1,6 +1,7 @@
 package com.starise.ipn.sms;
 
 import com.starise.ipn.model.AlertRequest;
+import com.starise.ipn.service.IpnService;
 import com.starise.ipn.service.MpesaService;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -31,14 +32,14 @@ public class ProcessAlert {
 
     @Autowired
     private ConfigurableEnvironment configurableEnvironment;
-
     public final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private final Pattern holderPattern = Pattern.compile("\\{.*?\\}");
     public final DecimalFormat decimalFormat = new DecimalFormat("#,##0.##");
     private String smsURL = env.getProperty("sms.url");
-    private String apiKey =  env.getProperty("sms.apiKey");
-    private String partnerID = env.getProperty("sms.partnerId");;
-    private String shortCode = env.getProperty("sms.bgsCode");;
+    private String apiKey = env.getProperty("sms.apiKey");
+    private String partnerID = env.getProperty("sms.partnerId");
+    private String shortCode = env.getProperty("wpcode");
+
 
     public boolean sendAlert(AlertRequest alertRequest) {
         String url = smsURL;
@@ -49,7 +50,7 @@ public class ProcessAlert {
             processResponse(response);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
             return false;
         }
     }
@@ -65,7 +66,6 @@ public class ProcessAlert {
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
             return response.body().string();
         }
     }
@@ -98,11 +98,11 @@ public class ProcessAlert {
             int networkId = response.getInt("networkid");
 
             // Process the extracted values
-            System.out.println("Response Code: " + responseCode);
-            System.out.println("Response Description: " + responseDescription);
-            System.out.println("Mobile: " + mobile);
-            System.out.println("Message ID: " + messageId);
-            System.out.println("Network ID: " + networkId);
+            logger.info("Response Code: {}", responseCode);
+            logger.info("Response Description: {}", responseDescription);
+            logger.info("Mobile: {}", mobile);
+            logger.info("Message ID: {}", messageId);
+            logger.info("Network ID: {}", networkId);
 
         }
     }
@@ -110,8 +110,12 @@ public class ProcessAlert {
     private String processTemplate(String smsTypeCode) {
         String repaymentTemplate = "Dear {CLIENTNAME}, we have received your payment of {CURRENCY} {AMOUNT} from {SENDER} at {TXNDATE} towards loan repayment. Thank you";
         String savingsTemplate = "Dear {CLIENTNAME}, we have received your savings deposit of {CURRENCYCODE} {AMOUNT} from {SENDER} at {TXNDATE}. Thank you";
+        String loanReminderTemplate = "Dear {CLIENTNAME}, Your loan of {CURRENCYCODE} {AMOUNT} will be due on {TXNDATE}. Please repay to avoid penalties";
+
         if (!smsTypeCode.equalsIgnoreCase("SV")) {
             return repaymentTemplate;
+        } else if (!smsTypeCode.equalsIgnoreCase("LD")) {
+            return loanReminderTemplate;
         } else {
             return savingsTemplate;
         }
