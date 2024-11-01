@@ -47,10 +47,17 @@ public class AccountService {
                 accountInfo.setProductName(accountNode.path("productName").asText());
                 accountInfo.setShortProductName(accountNode.path("shortProductName").asText());
                 accountInfo.setStatus(accountNode.path("status").path("value").asText());
-                accountInfo.setAccountBalance(accountNode.path("accountBalance").asDouble());
+                accountInfo.setAccountBalance(isLoan(accountInfo.getShortProductName()) ? accountNode.path("loanBalance").asDouble() : accountNode.path("accountBalance").asDouble());
 
                 accountInfoList.add(accountInfo);
             }
         }
+    }
+
+    private boolean isLoan(String productPrefix) {
+        return productPrefix.equalsIgnoreCase("BL")
+                || productPrefix.equalsIgnoreCase("EM")
+                || productPrefix.equalsIgnoreCase("EL")
+                || productPrefix.equalsIgnoreCase("ML");
     }
 }

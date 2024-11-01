@@ -19,6 +19,7 @@ public class AlertRequest {
     private String clientName;
     private String messageType;
     private BigDecimal amount;
+    private BigDecimal balance;
     private String receipt;
     private String detail;
     private String senderName;

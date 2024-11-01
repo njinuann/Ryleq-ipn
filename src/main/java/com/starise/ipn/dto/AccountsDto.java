@@ -10,6 +10,15 @@ public class AccountsDto {
     private String mobile_no;
     private String productName;
     private String productPrefix;
+    private Double account_balance;
+
+    public Double getAccount_balance() {
+        return account_balance;
+    }
+
+    public void setAccount_balance(Double account_balance) {
+        this.account_balance = account_balance;
+    }
 
     public String getProductName() {
         return productName;

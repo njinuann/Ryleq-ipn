@@ -30,6 +30,9 @@ public class ProcessAlert {
     private final String apiKey;
     private final String partnerID;
     private final String shortCode;
+    private final String savingsAlert;
+    private final String loanAlert;
+    private final String reminderAlert;
 
     public final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
@@ -44,6 +47,9 @@ public class ProcessAlert {
         this.apiKey = env.getProperty("sms.apiKey");
         this.partnerID = env.getProperty("sms.partnerId");
         this.shortCode = env.getProperty("sms.wpcode");
+        this.savingsAlert = env.getProperty("sms.savingsAlert");
+        this.loanAlert = env.getProperty("sms.loanAlert");
+        this.reminderAlert = env.getProperty("sms.reminderAlert");
     }
 
     public boolean sendAlert(AlertRequest alertRequest) {
@@ -111,11 +117,11 @@ public class ProcessAlert {
     private String processTemplate(String smsTypeCode) {
         switch (smsTypeCode.toUpperCase()) {
             case "SV":
-                return "Dear {CLIENTNAME}, We have received your savings deposit of {CURRENCYCODE} {AMOUNT} from {SENDER} at {TXNDATE}, Ref. {RECEIPT} Thank you";
+                return savingsAlert;
             case "LD":
-                return "Dear {CLIENTNAME}, Your loan of {CURRENCYCODE} {AMOUNT} will be due on {TXNDATE}. Please repay to avoid penalties";
+                return reminderAlert;
             default:
-                return "Dear {CLIENTNAME}, We have received your payment of {CURRENCY} {AMOUNT} from {SENDER} at {TXNDATE} towards loan repayment. Thank you";
+                return loanAlert;
         }
     }
 
@@ -126,7 +132,7 @@ public class ProcessAlert {
                 String replacement = "<>";
                 switch (placeHolder.toUpperCase()) {
                     case "{CLIENTNAME}":
-                        replacement = alertRequest.getClientName();
+                        replacement = firstName(alertRequest.getClientName());
                         break;
                     case "{CLIENTID}":
                         replacement = alertRequest.getClientId();
@@ -151,6 +157,9 @@ public class ProcessAlert {
                         break;
                     case "{TXNDATE}":
                         replacement = alertRequest.getTxnDate().toString();
+                        break;
+                    case "{BALANCE}":
+                        replacement = (alertRequest.getBalance().compareTo(BigDecimal.ZERO) < 0) ? "<>" : alertRequest.getBalance().toPlainString();
                         break;
                 }
                 text = replaceAll(text, placeHolder, replacement);
@@ -216,4 +225,40 @@ public class ProcessAlert {
     public static boolean isBlank(Object object) {
         return object == null || "{}".equals(String.valueOf(object).trim()) || "[]".equals(String.valueOf(object).trim()) || "".equals(String.valueOf(object).trim()) || "null".equals(String.valueOf(object).trim()) || String.valueOf(object).trim().toLowerCase().contains("---select");
     }
+
+    public String firstName(String name) {
+        return name != null && name.trim().length() > 0 ? capitalize(name.trim().split("\\s")[0]) : name;
+    }
+
+    public String capitalize(String text) {
+        return capitalize(text, true);
+    }
+
+    public String capitalize(String text, boolean convertAllXters) {
+        if (text != null && text.length() > 0) {
+            char p = '0';
+            StringBuilder builder = new StringBuilder();
+            for (char c : (convertAllXters ? text.toLowerCase() : text).toCharArray()) {
+                builder.append(p = (Character.isLetter(p) ? c : Character.toUpperCase(c)));
+            }
+            return cleanSpaces(builder.toString());
+        }
+        return text;
+    }
+
+    public String decapitalize(String text) {
+        if (text != null && text.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            for (String word : text.split("\\s")) {
+                builder.append(word.substring(0, 1).toLowerCase()).append(word.substring(1)).append(" ");
+            }
+            return builder.toString().trim();
+        }
+        return text;
+    }
+
+    public String cleanSpaces(String text) {
+        return !isBlank(text) ? text.replaceAll("\\s+", " ").trim() : text;
+    }
+
 }

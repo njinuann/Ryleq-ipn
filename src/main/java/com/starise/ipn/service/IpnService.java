@@ -64,7 +64,7 @@ public class IpnService {
 
     private static final Logger logger = LoggerFactory.getLogger(IpnService.class);
 
-    private String exernalUrl = "https://evolve.bgs.co.ke/fineract-provider/api/v1/";
+    private String exernalUrl = "https://evolve.ryleq.com/fineract-provider/api/v1/";
     private String tenantId = "client_104";
     private String username = "mifos";
     private String password = "mifos123";
@@ -237,23 +237,27 @@ public class IpnService {
                             getAccountEntity().setId((long) accountInfo.getId());
                             getAccountEntity().setProductName(accountInfo.getProductName());
                             getAccountEntity().setProductPrefix(accountInfo.getShortProductName());
+                            getAccountEntity().setAccount_balance(accountInfo.getAccountBalance());
                         } else if (!accountInfo.getShortProductName().equalsIgnoreCase(acctPrefix) && accountInfo.getStatus().equalsIgnoreCase("Active")) {
                             getAccountEntity().setAccount_no(accountInfo.getAccountNo());
                             getAccountEntity().setId((long) accountInfo.getId());
                             getAccountEntity().setProductName(accountInfo.getProductName());
                             getAccountEntity().setProductPrefix(accountInfo.getShortProductName());
+                            getAccountEntity().setAccount_balance(accountInfo.getAccountBalance());
                         }
                     } else if (!isLoan(accountInfo.getShortProductName()) && accountInfo.getStatus().equalsIgnoreCase("Active")) {
                         getAccountEntity().setAccount_no(accountInfo.getAccountNo());
                         getAccountEntity().setId((long) accountInfo.getId());
                         getAccountEntity().setProductName(accountInfo.getProductName());
                         getAccountEntity().setProductPrefix(accountInfo.getShortProductName());
+                        getAccountEntity().setAccount_balance(accountInfo.getAccountBalance());
                     } else if (acctPrefix.equalsIgnoreCase("SV")) {
                         if (accountInfo.getStatus().equalsIgnoreCase("Active") && !isLoan(accountInfo.getShortProductName())) {
                             getAccountEntity().setAccount_no(accountInfo.getAccountNo());
                             getAccountEntity().setId((long) accountInfo.getId());
                             getAccountEntity().setProductName(accountInfo.getProductName());
                             getAccountEntity().setProductPrefix(accountInfo.getShortProductName());
+                            getAccountEntity().setAccount_balance(accountInfo.getAccountBalance());
                         }
                     }
 
@@ -486,6 +490,7 @@ public class IpnService {
                     } else {
                         Long tenatId = tenantDto.getId();
                         AccountsDto tenant = getAcounts(tenatId, accountType);
+                        alertRequest.setBalance(isBlank(tenant.getAccount_balance())? BigDecimal.ONE.multiply(new BigDecimal(-1)) : BigDecimal.valueOf(tenant.getAccount_balance()).subtract(mpesaAmount));
 
                         String txnDate = new SimpleDateFormat("dd MMM yyyy").format(new Date());
                         if (isLoan(tenant.getProductPrefix())) {
@@ -706,33 +711,6 @@ public class IpnService {
         System.out.println("Converted LocalDateTime: " + dateTime);
         return dateTime;
     }
-    //    public TenantDto validateAccount(MpesaRequest mpesaRequest) {
-//        // Implement process logic
-//        TenantDto tenantDto =   repository.findByIdNo(mpesaRequest.getBillRefNumber());
-//        if (tenantDto != null) {
-//            // Call external JSON web service
-//            RestTemplate restTemplate = new RestTemplate();
-//            String urlEndpoint = exernalUrl;
-//            ResponseEntity<String> response = restTemplate.postForEntity(exernalUrl+urlEndpoint, tenantDto, String.class);
-//            return tenantDto;
-//        }else{
-//            throw new RuntimeException("No record Found");
-//        }
-//    }
-//    public TenantDto getAllAccounts(MpesaRequest mpesaRequest) {
-//        // Implement process logic
-//        TenantDto tenantDto =   repository.findByIdNo(mpesaRequest.getBillRefNumber());
-//        if (tenantDto != null) {
-//            // Call external JSON web service
-//            RestTemplate restTemplate = new RestTemplate();
-//            String urlEndpoint = exernalUrl;
-//            ResponseEntity<String> response = restTemplate.postForEntity(exernalUrl+urlEndpoint, tenantDto, String.class);
-//            return tenantDto;
-//        }else{
-//            throw new RuntimeException("No record Found");
-//        }
-//    }
-
 
     private OkHttpClient getUnsafeOkHttpClient() {
         try {
