@@ -4,12 +4,14 @@ package com.starise.ipn.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
 @Setter
+@ToString
 public class AlertRequest {
     private int smsId;
     private String mobileNo;
@@ -24,6 +26,7 @@ public class AlertRequest {
     private String detail;
     private String senderName;
     private String txnDate;
+    private BigDecimal threshold;
     private SmsTemplate smsTemplate;
 
  }

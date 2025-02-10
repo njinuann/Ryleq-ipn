@@ -1,0 +1,81 @@
+2024-11-27 20:27:19 - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/NJINU/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/NJINU/.m2/repository/org/json/json/20230227/json-20230227.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-11-27 20:27:19 - Starting MpesaIpnApplicationTests using Java 1.8.0_421 on DESKTOP-EJ77NMH with PID 14332 (started by NJINU in C:\Users\NJINU\Documents\projects\Ryleq-ipn)
+2024-11-27 20:27:19 - Running with Spring Boot v2.7.18, Spring v5.3.31
+2024-11-27 20:27:19 - No active profile set, falling back to 1 default profile: "default"
+2024-11-27 20:27:20 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-27 20:27:20 - Finished Spring Data repository scanning in 77 ms. Found 3 JPA repository interfaces.
+2024-11-27 20:27:21 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-27 20:27:21 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-11-27 20:27:21 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-11-27 20:27:22 - HikariPool-1 - Starting...
+2024-11-27 20:27:32 - HikariPool-1 - Start completed.
+2024-11-27 20:27:32 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-11-27 20:27:33 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-11-27 20:27:33 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-27 20:27:35 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-27 20:27:35 - Started MpesaIpnApplicationTests in 16.646 seconds (JVM running for 18.091)
+2024-11-27 20:27:36 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-27 20:27:36 - HikariPool-1 - Shutdown initiated...
+2024-11-27 20:27:36 - HikariPool-1 - Shutdown completed.
+2024-11-27 22:27:02 - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/NJINU/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/NJINU/.m2/repository/org/json/json/20230227/json-20230227.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-11-27 22:27:02 - Starting MpesaIpnApplicationTests using Java 1.8.0_421 on DESKTOP-EJ77NMH with PID 16016 (started by NJINU in C:\Users\NJINU\Documents\projects\Ryleq-ipn)
+2024-11-27 22:27:02 - Running with Spring Boot v2.7.18, Spring v5.3.31
+2024-11-27 22:27:02 - No active profile set, falling back to 1 default profile: "default"
+2024-11-27 22:27:03 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-27 22:27:03 - Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
+2024-11-27 22:27:04 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-27 22:27:04 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-11-27 22:27:04 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-11-27 22:27:04 - HikariPool-1 - Starting...
+2024-11-27 22:27:06 - HikariPool-1 - Start completed.
+2024-11-27 22:27:07 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-11-27 22:27:07 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-11-27 22:27:07 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-27 22:27:09 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-27 22:27:09 - Started MpesaIpnApplicationTests in 7.415 seconds (JVM running for 8.772)
+2024-11-27 22:27:09 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-27 22:27:09 - HikariPool-1 - Shutdown initiated...
+2024-11-27 22:27:10 - HikariPool-1 - Shutdown completed.
+2024-11-27 22:52:21 - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/NJINU/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/NJINU/.m2/repository/org/json/json/20230227/json-20230227.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2024-11-27 22:52:21 - Starting MpesaIpnApplicationTests using Java 1.8.0_421 on DESKTOP-EJ77NMH with PID 12756 (started by NJINU in C:\Users\NJINU\Documents\projects\Ryleq-ipn)
+2024-11-27 22:52:21 - Running with Spring Boot v2.7.18, Spring v5.3.31
+2024-11-27 22:52:21 - No active profile set, falling back to 1 default profile: "default"
+2024-11-27 22:52:21 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-27 22:52:21 - Finished Spring Data repository scanning in 69 ms. Found 3 JPA repository interfaces.
+2024-11-27 22:52:22 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-27 22:52:22 - HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-11-27 22:52:22 - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-11-27 22:52:23 - HikariPool-1 - Starting...
+2024-11-27 22:52:25 - HikariPool-1 - Start completed.
+2024-11-27 22:52:25 - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-11-27 22:52:26 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-11-27 22:52:26 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-27 22:52:27 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-27 22:52:28 - Started MpesaIpnApplicationTests in 7.503 seconds (JVM running for 8.812)
+2024-11-27 22:52:28 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-27 22:52:28 - HikariPool-1 - Shutdown initiated...
+2024-11-27 22:52:28 - HikariPool-1 - Shutdown completed.

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,12 +28,16 @@ public class ProcessAlert {
     private final Pattern holderPattern;
 
     private final String smsURL;
+    private final String smsBalanceURL;
     private final String apiKey;
     private final String partnerID;
     private final String shortCode;
     private final String savingsAlert;
     private final String loanAlert;
     private final String reminderAlert;
+    private final String balSmsRecipients;
+    private final String smsBalanceAlert;
+    private final String smsBalanceThreshold;
 
     public final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
@@ -44,12 +49,16 @@ public class ProcessAlert {
         this.holderPattern = Pattern.compile("\\{.*?\\}");
 
         this.smsURL = env.getProperty("sms.url");
+        this.smsBalanceURL = env.getProperty("sms.balanceUrl");
         this.apiKey = env.getProperty("sms.apiKey");
         this.partnerID = env.getProperty("sms.partnerId");
         this.shortCode = env.getProperty("sms.wpcode");
         this.savingsAlert = env.getProperty("sms.savingsAlert");
         this.loanAlert = env.getProperty("sms.loanAlert");
         this.reminderAlert = env.getProperty("sms.reminderAlert");
+        this.smsBalanceAlert = env.getProperty("sms.smsBalanceAlert");
+        this.balSmsRecipients = env.getProperty("sms.balSmsRecipients");
+        this.smsBalanceThreshold = env.getProperty("sms.smsBalanceThreshold");
     }
 
     public boolean sendAlert(AlertRequest alertRequest) {
@@ -61,6 +70,43 @@ public class ProcessAlert {
         } catch (IOException e) {
             logger.error("Error sending alert: {}", e.toString());
             return false;
+        }
+    }
+
+    public void sendBalanceAlert() {
+        double balance = checkSMSBalance();
+        ArrayList<String> numbers = extractNumbers(balSmsRecipients);
+        if (balance <= Double.parseDouble(smsBalanceThreshold)) {
+            for (String recipient : numbers) {
+                AlertRequest alertRequest = new AlertRequest();
+                alertRequest.setMessageType("BL");
+                alertRequest.setMobileNo(recipient);
+                alertRequest.setAmount(BigDecimal.valueOf(balance));
+                alertRequest.setClientName("Admin");
+                alertRequest.setThreshold(BigDecimal.valueOf(Double.parseDouble(smsBalanceThreshold)));
+                alertRequest.setAmount(BigDecimal.valueOf(balance));
+
+                String messageTemplate = processTemplate(alertRequest.getMessageType());
+                String message = replaceMasks(messageTemplate, alertRequest);
+                alertRequest.setMessage(message);
+
+                if (sendAlert(alertRequest)) {
+                    logger.error("Balance Alert sent");
+                } else {
+                    logger.error("Balance Alert Failed");
+                }
+            }
+        }
+    }
+
+    public double checkSMSBalance() {
+        String requestBody = createBalanceRequestJson();
+        try {
+            String response = sendRequest(smsBalanceURL, requestBody);
+            return processBalanceResponse(response);
+        } catch (IOException e) {
+            logger.error("Error Balance sending alert: {}", e.toString());
+            return -1;
         }
     }
 
@@ -79,9 +125,35 @@ public class ProcessAlert {
         }
     }
 
+    public ArrayList<String> extractNumbers(String recipients) {
+
+        String regex = "\\d+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(recipients);
+        ArrayList<String> numbers = new ArrayList<>();
+        while (matcher.find()) {
+            numbers.add(matcher.group());
+        }
+
+        if (numbers.size() > 1) {
+            System.out.println("The string contains multiple numbers.");
+            System.out.println("Extracted Numbers: " + numbers);
+        } else if (numbers.size() == 1) {
+            System.out.println("The string contains only one number: " + numbers.get(0));
+        } else {
+            System.out.println("No numbers found in the string.");
+        }
+        return numbers;
+    }
+
     private String createRequestJson(AlertRequest alertRequest) {
         String messageTemplate = processTemplate(alertRequest.getMessageType());
         String message = replaceMasks(messageTemplate, alertRequest);
+
+        logger.info("===============================================");
+        logger.info("SMS Sent to: {}", alertRequest.getMobileNo());
+        logger.info("SMS Sent: {}", message);
+        logger.info("===============================================");
 
         JSONObject json = new JSONObject();
         json.put("apikey", apiKey);
@@ -94,25 +166,80 @@ public class ProcessAlert {
         return json.toString();
     }
 
+    private String createBalanceRequestJson() {
+
+        JSONObject json = new JSONObject();
+        json.put("apikey", apiKey);
+        json.put("partnerID", partnerID);
+
+        return json.toString();
+    }
+
     private void processResponse(String jsonResponse) {
         JSONObject jsonObject = new JSONObject(jsonResponse);
         JSONArray responses = jsonObject.getJSONArray("responses");
+        try {
+            for (int i = 0; i < responses.length(); i++) {
+                JSONObject response = responses.getJSONObject(i);
+                int responseCode = response.getInt("response-code");
 
-        for (int i = 0; i < responses.length(); i++) {
-            JSONObject response = responses.getJSONObject(i);
-            int responseCode = response.getInt("response-code");
-            String responseDescription = response.getString("response-description");
-            long mobile = response.getLong("mobile");
-            String messageId = response.getString("messageid");
-            int networkId = response.getInt("networkid");
+                String responseDescription = response.getString("response-description");
+                long mobile = response.getLong("mobile");
+                if (responseCode == 200) {
+                    String messageId = response.getString("messageid");
+                    int networkId = response.getInt("networkid");
 
-            logger.info("Response Code: {}", responseCode);
-            logger.info("Response Description: {}", responseDescription);
-            logger.info("Mobile: {}", mobile);
-            logger.info("Message ID: {}", messageId);
-            logger.info("Network ID: {}", networkId);
+                    logger.info("Response Code: {}", responseCode);
+                    logger.info("Response Description: {}", responseDescription);
+                    logger.info("Mobile: {}", mobile);
+                    logger.info("Message ID: {}", messageId);
+                    logger.info("Network ID: {}", networkId);
+                } else {
+                    logger.info("=================ALERT NOT SUCCESSFUL = {}  =========================", responseCode);
+                    logger.info("E Response Code: {}", responseCode);
+                    logger.info("E Response Description: {}", responseDescription);
+                    logger.info("================= =========================");
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Error Encountered during processing of alerts", ex);
         }
     }
+
+    private Double processBalanceResponse(String jsonResponse) {
+        Double balance = 0.0;
+        JSONObject jsonObject = new JSONObject(jsonResponse);
+        JSONArray responses = jsonObject.getJSONArray("responses");
+        try {
+            for (int i = 0; i < responses.length(); i++) {
+                JSONObject response = responses.getJSONObject(i);
+                int responseCode = response.getInt("response-code");
+
+                String responseDescription = response.getString("response-description");
+                String credit = response.getString("credit");
+                if (responseCode == 200) {
+                    String messageId = response.getString("messageid");
+                    int networkId = response.getInt("networkid");
+
+                    logger.info("BL Response Code: {}", responseCode);
+                    logger.info("BL Response Description: {}", responseDescription);
+                    logger.info("credit: {}", credit);
+                    balance = Double.valueOf(credit);
+
+
+                } else {
+                    logger.info("=================BAL QUERY NOT SUCCESSFUL = {}  =========================", responseCode);
+                    logger.info("E B Response Code: {}", responseCode);
+                    logger.info("E B Response Description: {}", responseDescription);
+                    logger.info("================= END =========================");
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Error Encountered during processing of alerts", ex);
+        }
+        return balance;
+    }
+
 
     private String processTemplate(String smsTypeCode) {
         switch (smsTypeCode.toUpperCase()) {
@@ -120,12 +247,15 @@ public class ProcessAlert {
                 return savingsAlert;
             case "LD":
                 return reminderAlert;
+            case "BL":
+                return smsBalanceAlert;
             default:
                 return loanAlert;
         }
     }
 
     public String replaceMasks(String text, AlertRequest alertRequest) {
+
         if (!isBlank(text)) {
             ArrayList<String> holdersList = extractPlaceHolders(text);
             for (String placeHolder : holdersList) {
@@ -156,10 +286,10 @@ public class ProcessAlert {
                         replacement = alertRequest.getSenderName();
                         break;
                     case "{TXNDATE}":
-                        replacement = alertRequest.getTxnDate().toString();
+                        replacement = alertRequest.getTxnDate();
                         break;
                     case "{BALANCE}":
-                        replacement = (alertRequest.getBalance().compareTo(BigDecimal.ZERO) < 0) ? "<>" : alertRequest.getBalance().toPlainString();
+                        replacement = (alertRequest.getBalance().compareTo(BigDecimal.ZERO) <= 0) ? "0" : alertRequest.getBalance().toPlainString();
                         break;
                 }
                 text = replaceAll(text, placeHolder, replacement);
@@ -227,7 +357,7 @@ public class ProcessAlert {
     }
 
     public String firstName(String name) {
-        return name != null && name.trim().length() > 0 ? capitalize(name.trim().split("\\s")[0]) : name;
+        return name != null && !name.trim().isEmpty() ? capitalize(name.trim().split("\\s")[0]) : name;
     }
 
     public String capitalize(String text) {
@@ -235,7 +365,7 @@ public class ProcessAlert {
     }
 
     public String capitalize(String text, boolean convertAllXters) {
-        if (text != null && text.length() > 0) {
+        if (text != null && !text.isEmpty()) {
             char p = '0';
             StringBuilder builder = new StringBuilder();
             for (char c : (convertAllXters ? text.toLowerCase() : text).toCharArray()) {
@@ -247,7 +377,7 @@ public class ProcessAlert {
     }
 
     public String decapitalize(String text) {
-        if (text != null && text.length() > 0) {
+        if (text != null && !text.isEmpty()) {
             StringBuilder builder = new StringBuilder();
             for (String word : text.split("\\s")) {
                 builder.append(word.substring(0, 1).toLowerCase()).append(word.substring(1)).append(" ");

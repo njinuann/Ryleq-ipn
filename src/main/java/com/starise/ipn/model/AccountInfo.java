@@ -9,6 +9,7 @@ public class AccountInfo {
     private String status;
     private Double accountBalance;
 
+
     public AccountInfo() {
     }
 

@@ -2,19 +2,27 @@
     <property name="LOG_FILE" value="logs/events.log"/>
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} - %msg%n"/>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_FILE}</file>
-        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Rotate logs daily and when file size exceeds 500MB -->
+            <fileNamePattern>logs/events-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>200MB</maxFileSize>
+            <!-- Keep 30 days of logs -->
+            <maxHistory>30</maxHistory>
+            <!-- Total size of all log files is capped at 5GB -->
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
     <root level="info">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="ROLLING_FILE"/>
     </root>
 
     <logger name="com.starise.ipn.MpesaIpn" level="debug" additivity="false">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="ROLLING_FILE"/>
     </logger>
 </configuration>

@@ -37,6 +37,28 @@ public class AccountService {
         return accountInfoList;
     }
 
+    public List<AccountInfo> extractLoanAccounts(String jsonResponse) throws IOException {
+        JsonNode rootNode = objectMapper.readTree(jsonResponse);
+
+        List<AccountInfo> accountInfoList = new ArrayList<>();
+
+        // Extract loan accounts
+        JsonNode loanAccountsNode = rootNode.path("loanAccounts");
+        extractAccountDetails(loanAccountsNode, accountInfoList);
+
+        return accountInfoList;
+    }
+
+    public List<AccountInfo> extractSavingsAccounts(String jsonResponse) throws IOException {
+        JsonNode rootNode = objectMapper.readTree(jsonResponse);
+
+        List<AccountInfo> accountInfoList = new ArrayList<>();
+        JsonNode savingsAccountsNode = rootNode.path("savingsAccounts");
+        extractAccountDetails(savingsAccountsNode, accountInfoList);
+
+        return accountInfoList;
+    }
+
     private void extractAccountDetails(JsonNode accountsNode, List<AccountInfo> accountInfoList) {
         if (accountsNode.isArray()) {
             for (JsonNode accountNode : accountsNode) {
