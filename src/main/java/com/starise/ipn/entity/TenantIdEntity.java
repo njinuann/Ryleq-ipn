@@ -80,4 +80,15 @@ public class TenantIdEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "TenantIdEntity{" +
+                "id=" + id +
+                ", client_id=" + client_id +
+                ", document_type_id=" + document_type_id +
+                ", document_key='" + document_key + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

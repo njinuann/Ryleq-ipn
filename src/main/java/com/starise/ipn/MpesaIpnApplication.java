@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,8 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
-//@EntityScan(basePackages = "com.starise.ipn.entity")
-//@EnableJpaRepositories(basePackages = "com.starise.ipn.repository")
-//@ComponentScan(basePackages = {"com.starise.ipn"})
-//@EnableJpaRepositories(basePackages = "com.starise.ipn.repository")
+//@EnableScheduling
+
 public class MpesaIpnApplication {
 
     public static void main(String[] args) {

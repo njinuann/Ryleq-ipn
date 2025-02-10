@@ -12,6 +12,16 @@ public class AccountsDto {
     private String productPrefix;
     private Double account_balance;
 
+    private boolean loan = false;
+
+    public boolean isLoan() {
+        return loan;
+    }
+
+    public void setLoan(boolean loan) {
+        this.loan = loan;
+    }
+
     public Double getAccount_balance() {
         return account_balance;
     }
@@ -83,5 +93,20 @@ public class AccountsDto {
 
     public void setMobile_no(String mobile_no) {
         this.mobile_no = mobile_no;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountsDto{" +
+                "id=" + id +
+                ", display_name='" + display_name + '\'' +
+                ", account_no='" + account_no + '\'' +
+                ", external_id='" + external_id + '\'' +
+                ", mobile_no='" + mobile_no + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productPrefix='" + productPrefix + '\'' +
+                ", account_balance=" + account_balance +
+                ", loan=" + loan +
+                '}';
     }
 }

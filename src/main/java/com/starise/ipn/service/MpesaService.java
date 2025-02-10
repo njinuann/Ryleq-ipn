@@ -77,6 +77,7 @@ public class MpesaService {
                             .build();
 
                     try (Response registerResponse = client.newCall(registerRequest).execute()) {
+                        logger.info(" Registration response::=> {}", registerResponse.body().string());
                         if (!registerResponse.isSuccessful())
                             throw new IOException("Unexpected code " + registerResponse);
                         String responseBody = registerResponse.body().string();
@@ -93,6 +94,7 @@ public class MpesaService {
                 }
 
             } catch (Exception ex) {
+                logger.error("Error reg",ex);
                 ex.printStackTrace();
                 // Log your exception here
             }
