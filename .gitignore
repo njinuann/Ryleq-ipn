@@ -4,7 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 logs/
-/Mediums
+Mediums/
+IPN/
 
 ### STS ###
 .apt_generated
