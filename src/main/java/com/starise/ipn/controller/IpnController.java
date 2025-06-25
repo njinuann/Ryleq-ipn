@@ -1,5 +1,6 @@
 package com.starise.ipn.controller;
 
+import com.starise.ipn.Util.AXCaller;
 import com.starise.ipn.Util.AXWorker;
 import com.starise.ipn.entity.MpesaRequest;
 //import com.starise.ipn.entity.TenantIdEntity;
@@ -28,9 +29,6 @@ public class IpnController {
 
     @Autowired
     private IpnService ipnService;
-
-//    @Autowired
-//    private MpesaTxnService mpesaTxnService;
 
     @GetMapping("/echo")
     public String getData() {

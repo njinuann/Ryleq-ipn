@@ -128,5 +128,24 @@ public class IpnLog {
     public void setBusinessShortCode(String businessShortCode) {
         this.businessShortCode = businessShortCode;
     }
+
+    @Override
+    public String toString() {
+        return "IpnLog{" +
+                "id=" + id +
+                ", transactionType='" + transactionType + '\'' +
+                ", billRefNumber='" + billRefNumber + '\'' +
+                ", orgAccountBalance=" + orgAccountBalance +
+                ", msisdn='" + msisdn + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", transAmount=" + transAmount +
+                ", thirdPartyTransId='" + thirdPartyTransId + '\'' +
+                ", invoiceNumber='" + invoiceNumber + '\'' +
+                ", transId='" + transId + '\'' +
+                ", transTime=" + transTime +
+                ", businessShortCode='" + businessShortCode + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
 

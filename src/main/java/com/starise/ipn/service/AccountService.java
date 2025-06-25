@@ -80,6 +80,7 @@ public class AccountService {
         return productPrefix.equalsIgnoreCase("BL")
                 || productPrefix.equalsIgnoreCase("EM")
                 || productPrefix.equalsIgnoreCase("EL")
-                || productPrefix.equalsIgnoreCase("ML");
+                || productPrefix.equalsIgnoreCase("ML")
+                || productPrefix.equalsIgnoreCase("SB");
     }
 }

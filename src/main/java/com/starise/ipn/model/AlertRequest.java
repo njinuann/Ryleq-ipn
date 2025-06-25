@@ -1,7 +1,6 @@
 package com.starise.ipn.model;
 
 
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +16,7 @@ public class AlertRequest {
     private String mobileNo;
     private String message;
     private String accountNo;
-    private String clientId;
+    private String clientNo;
     private String clientName;
     private String messageType;
     private BigDecimal amount;
@@ -33,5 +32,6 @@ public class AlertRequest {
     private BigDecimal repaymentAmount;
     private int termFrequency;
     private String termCode;
-
- }
+    private Long clientId;
+    private boolean clientActive;
+}

@@ -26,6 +26,9 @@ public class TenantDto {
         this.idType = idType;
     }
 
+    public TenantDto() {
+    }
+
     public String getIdType() {
         return idType;
     }

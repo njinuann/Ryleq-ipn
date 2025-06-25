@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logger class="com.starise.ipn.Util.LogFile" datetime="Fri May 23 18:47:09 EAT 2025">
+<event realm="ipn" key="" datetime="Fri May 23 18:47:09 EAT 2025">
+    <txn>
+    <exec>
+    	<mpesarequest>MpesaRequest{transactionType='Pay Bill', billRefNumber='25942168', orgAccountBalance='5404941.00', msisdn='2547 ***** 302', firstName='JANE', transAmount='300.00', thirdPartyTransID='', invoiceNumber='', transID='SFI0TTNR3Z', transTime='20240618073208', businessShortCode='4051099'}</mpesarequest>
+    	<start processing>25942168_SFI0TTNR3Z</start processing>
+    	<lock>java.util.concurrent.locks.ReentrantLock@1c6dbe1c[Locked by thread ForkJoinPool.commonPool-worker-1]</lock>
+    	<activelocks>1</activelocks>
+    	<clientno>25942168</clientno>
+    	<reference>25942168_SFI0TTNR3Z</reference>
+    	<narration>mpesa processing for 420</narration>
+    	<tenantid>420</tenantid>
+    	<gettenantreq>clients/420</gettenantreq>
+    	<gettenantres>{"id":420,"accountNo":"000000420","externalId":"25942168","status":{"id":300,"code":"clientStatusType.active","value":"Active"},"subStatus":{"active":false,"mandatory":false},"active":true,"activationDate":[2023,8,1],"firstname":"Brenda","middlename":"Mbuli","lastname":"Mulwa","displayName":"Brenda Mbuli Mulwa","mobileNo":"0722676877","dateOfBirth":[1987,5,5],"gender":{"id":15,"name":"Female","active":false,"mandatory":false},"clientType":{"active":false,"mandatory":false},"clientClassification":{"active":false,"mandatory":false},"isStaff":false,"officeId":11,"officeName":"Bamburi 1","staffId":14,"staffName":"Muriuki, Justus","timeline":{"submittedOnDate":[2020,12,11],"submittedByUsername":"Elias","submittedByFirstname":"Elias","submittedByLastname":"Yaa","activatedOnDate":[2023,8,1],"activatedByUsername":"Elias","activatedByFirstname":"Elias","activatedByLastname":"Yaa"},"savingsAccountId":420,"legalForm":{"id":1,"code":"legalFormType.person","value":"PERSON"},"groups":[],"clientNonPersonDetails":{"constitution":{"active":false,"mandatory":false},"mainBusinessLine":{"active":false,"mandatory":false}}}</gettenantres>
+    	<tenantaccounts>AccountsDto{id=6868, display_name='null', account_no='000006868', external_id='null', mobile_no='null', productName='Biashara Loan', productPrefix='BL', account_balance=7300.0, loan=true}</tenantaccounts>
+    	<accountbalance>7000.00</accountbalance>
+    	<processloan>BL 000006868</processloan>
+    	<account>000006868</account>
+    	<loanamount>7300.0</loanamount>
+    	<repaymentamount>300.00</repaymentamount>
+    	<excesspayment>0</excesspayment>
+    	<repaymentamount>300.00</repaymentamount>
+    	<loanrequest>loans/6868/transactions?command=repayment</loanrequest>
+    	<mpesadate>18 Jun 2024</mpesadate>
+    	<loanrequesttocbsreq>{bankNumber=mpesa, note=mpesa loan payment, checkNumber=25942168, paymentTypeId=2, dateFormat=dd MMMM yyyy, transactionAmount=300.00, locale=en, transactionDate=23 May 2025, accountNumber=000006868, routingCode=JANE, receiptNumber=SFI0TTNR3Z}</loanrequesttocbsreq>
+    	<loanrequesttocbsres>{"officeId":11,"clientId":420,"loanId":6868,"resourceId":906777,"changes":{"transactionDate":"23 May 2025","transactionAmount":"300.00","locale":"en","dateFormat":"dd MMMM yyyy","paymentTypeId":"2","note":"mpesa loan payment","accountNumber":"000006868","checkNumber":"25942168","routingCode":"JANE","receiptNumber":"SFI0TTNR3Z","bankNumber":"mpesa"}}</loanrequesttocbsres>
+    	<handleipnrequest>Success</handleipnrequest>
+    	<alertrequest>AlertRequest(smsId=0, mobileNo=254722676877, message=null, accountNo=000000420, clientNo=null, clientName=Brenda Mbuli Mulwa, messageType=LN, amount=300.00, balance=7000.00, receipt=SFI0TTNR3Z, detail=null, senderName=JANE, txnDate=18-06-2024 07:32:08, threshold=null, smsTemplate=null, officer=null, loanAmount=null, repaymentAmount=null, termFrequency=0, termCode=null, clientId=null, clientActive=false)</alertrequest>
+    	<alertreq>AlertRequest(smsId=0, mobileNo=254722676877, message=null, accountNo=000000420, clientNo=null, clientName=Brenda Mbuli Mulwa, messageType=LN, amount=300.00, balance=7000.00, receipt=SFI0TTNR3Z, detail=null, senderName=JANE, txnDate=18-06-2024 07:32:08, threshold=null, smsTemplate=null, officer=null, loanAmount=null, repaymentAmount=null, termFrequency=0, termCode=null, clientId=null, clientActive=false)</alertreq>
+    	<smsalert>===============================================SMS Sent to: 254722676877SMS Sent:  Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 7000.00. Thank you for being a Wonderful Customer.===============================================</smsalert>
+    	<smsalertreq>{"apikey":"207676228ef11c4df572fbff7fa34d76","pass_type":"plain","mobile":"254722676877","partnerID":"11333","message":"Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 7000.00. Thank you for being a Wonderful Customer.","shortcode":"WonderfulPL"}</smsalertreq>
+    	<smsreq>{"apikey":"207676228ef11c4df572fbff7fa34d76","pass_type":"plain","mobile":"254722676877","partnerID":"11333","message":"Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 7000.00. Thank you for being a Wonderful Customer.","shortcode":"WonderfulPL"}</smsreq>
+    	<smsallowed>false</smsallowed>
+    	<smssent>254722676877</smssent>
+    	<completed>====OUT===</completed>
+    	<lockreleased>25942168_SFI0TTNR3Z</lockreleased>
+    	<activelocks>0</activelocks>
+    </exec>
+    </txn>
+</event>
+<event realm="ipn" key="" datetime="Fri May 23 18:51:05 EAT 2025">
+    <txn>
+    <exec>
+    	<mpesarequest>MpesaRequest{transactionType='Pay Bill', billRefNumber='25942168', orgAccountBalance='5404941.00', msisdn='2547 ***** 302', firstName='JANE', transAmount='300.00', thirdPartyTransID='', invoiceNumber='', transID='SFI0TTNR3Z', transTime='20240618073208', businessShortCode='4051099'}</mpesarequest>
+    	<start processing>25942168_SFI0TTNR3Z</start processing>
+    	<lock>java.util.concurrent.locks.ReentrantLock@430fa6f8[Locked by thread ForkJoinPool.commonPool-worker-1]</lock>
+    	<activelocks>1</activelocks>
+    	<clientno>25942168</clientno>
+    	<reference>25942168_SFI0TTNR3Z</reference>
+    	<narration>mpesa processing for 420</narration>
+    	<tenantid>420</tenantid>
+    	<gettenantreq>clients/420</gettenantreq>
+    	<gettenantres>{"id":420,"accountNo":"000000420","externalId":"25942168","status":{"id":300,"code":"clientStatusType.active","value":"Active"},"subStatus":{"active":false,"mandatory":false},"active":true,"activationDate":[2023,8,1],"firstname":"Brenda","middlename":"Mbuli","lastname":"Mulwa","displayName":"Brenda Mbuli Mulwa","mobileNo":"0722676877","dateOfBirth":[1987,5,5],"gender":{"id":15,"name":"Female","active":false,"mandatory":false},"clientType":{"active":false,"mandatory":false},"clientClassification":{"active":false,"mandatory":false},"isStaff":false,"officeId":11,"officeName":"Bamburi 1","staffId":14,"staffName":"Muriuki, Justus","timeline":{"submittedOnDate":[2020,12,11],"submittedByUsername":"Elias","submittedByFirstname":"Elias","submittedByLastname":"Yaa","activatedOnDate":[2023,8,1],"activatedByUsername":"Elias","activatedByFirstname":"Elias","activatedByLastname":"Yaa"},"savingsAccountId":420,"legalForm":{"id":1,"code":"legalFormType.person","value":"PERSON"},"groups":[],"clientNonPersonDetails":{"constitution":{"active":false,"mandatory":false},"mainBusinessLine":{"active":false,"mandatory":false}}}</gettenantres>
+    	<tenantaccounts>AccountsDto{id=6868, display_name='null', account_no='000006868', external_id='null', mobile_no='null', productName='Biashara Loan', productPrefix='BL', account_balance=7000.0, loan=true}</tenantaccounts>
+    	<accountbalance>6700.00</accountbalance>
+    	<processloan>BL 000006868</processloan>
+    	<account>000006868</account>
+    	<loanamount>7000.0</loanamount>
+    	<repaymentamount>300.00</repaymentamount>
+    	<excesspayment>0</excesspayment>
+    	<repaymentamount>300.00</repaymentamount>
+    	<loanrequest>loans/6868/transactions?command=repayment</loanrequest>
+    	<mpesadate>18 Jun 2024</mpesadate>
+    	<loanrequesttocbsreq>{bankNumber=mpesa, note=mpesa loan payment, checkNumber=25942168, paymentTypeId=2, dateFormat=dd MMMM yyyy, transactionAmount=300.00, locale=en, transactionDate=23 May 2025, accountNumber=000006868, routingCode=JANE, receiptNumber=SFI0TTNR3Z}</loanrequesttocbsreq>
+    	<loanrequesttocbsres>{"officeId":11,"clientId":420,"loanId":6868,"resourceId":906778,"changes":{"transactionDate":"23 May 2025","transactionAmount":"300.00","locale":"en","dateFormat":"dd MMMM yyyy","paymentTypeId":"2","note":"mpesa loan payment","accountNumber":"000006868","checkNumber":"25942168","routingCode":"JANE","receiptNumber":"SFI0TTNR3Z","bankNumber":"mpesa"}}</loanrequesttocbsres>
+    	<handleipnrequest>Success</handleipnrequest>
+    	<alertrequest>AlertRequest(smsId=0, mobileNo=254722676877, message=null, accountNo=000000420, clientNo=null, clientName=Brenda Mbuli Mulwa, messageType=LN, amount=300.00, balance=6700.00, receipt=SFI0TTNR3Z, detail=null, senderName=JANE, txnDate=18-06-2024 07:32:08, threshold=null, smsTemplate=null, officer=null, loanAmount=null, repaymentAmount=null, termFrequency=0, termCode=null, clientId=null, clientActive=false)</alertrequest>
+    	<alertreq>AlertRequest(smsId=0, mobileNo=254722676877, message=null, accountNo=000000420, clientNo=null, clientName=Brenda Mbuli Mulwa, messageType=LN, amount=300.00, balance=6700.00, receipt=SFI0TTNR3Z, detail=null, senderName=JANE, txnDate=18-06-2024 07:32:08, threshold=null, smsTemplate=null, officer=null, loanAmount=null, repaymentAmount=null, termFrequency=0, termCode=null, clientId=null, clientActive=false)</alertreq>
+    	<smsalert>===============================================SMS Sent to: 254722676877SMS Sent:  Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 6700.00. Thank you for being a Wonderful Customer.===============================================</smsalert>
+    	<smsalertreq>{"apikey":"207676228ef11c4df572fbff7fa34d76","pass_type":"plain","mobile":"254722676877","partnerID":"11333","message":"Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 6700.00. Thank you for being a Wonderful Customer.","shortcode":"WonderfulPL"}</smsalertreq>
+    	<smsreq>{"apikey":"207676228ef11c4df572fbff7fa34d76","pass_type":"plain","mobile":"254722676877","partnerID":"11333","message":"Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 6700.00. Thank you for being a Wonderful Customer.","shortcode":"WonderfulPL"}</smsreq>
+    	<smsallowed>false</smsallowed>
+    	<smssent>254722676877</smssent>
+    	<completed>====OUT===</completed>
+    	<lockreleased>25942168_SFI0TTNR3Z</lockreleased>
+    	<activelocks>0</activelocks>
+    	<duration>-17742 Ms</duration>
+    </exec>
+    </txn>
+</event>
+<event realm="ipn" key="" datetime="Fri May 23 18:51:55 EAT 2025">
+    <txn>
+    <exec>
+    	<mpesarequest>MpesaRequest{transactionType='Pay Bill', billRefNumber='25942168', orgAccountBalance='5404941.00', msisdn='2547 ***** 302', firstName='JANE', transAmount='300.00', thirdPartyTransID='', invoiceNumber='', transID='SFI0TTNR3Z', transTime='20240618073208', businessShortCode='4051099'}</mpesarequest>
+    	<start processing>25942168_SFI0TTNR3Z</start processing>
+    	<lock>java.util.concurrent.locks.ReentrantLock@12ccac74[Locked by thread ForkJoinPool.commonPool-worker-2]</lock>
+    	<activelocks>1</activelocks>
+    	<clientno>25942168</clientno>
+    	<reference>25942168_SFI0TTNR3Z</reference>
+    	<narration>mpesa processing for 420</narration>
+    	<tenantid>420</tenantid>
+    	<gettenantreq>clients/420</gettenantreq>
+    	<gettenantres>{"id":420,"accountNo":"000000420","externalId":"25942168","status":{"id":300,"code":"clientStatusType.active","value":"Active"},"subStatus":{"active":false,"mandatory":false},"active":true,"activationDate":[2023,8,1],"firstname":"Brenda","middlename":"Mbuli","lastname":"Mulwa","displayName":"Brenda Mbuli Mulwa","mobileNo":"0722676877","dateOfBirth":[1987,5,5],"gender":{"id":15,"name":"Female","active":false,"mandatory":false},"clientType":{"active":false,"mandatory":false},"clientClassification":{"active":false,"mandatory":false},"isStaff":false,"officeId":11,"officeName":"Bamburi 1","staffId":14,"staffName":"Muriuki, Justus","timeline":{"submittedOnDate":[2020,12,11],"submittedByUsername":"Elias","submittedByFirstname":"Elias","submittedByLastname":"Yaa","activatedOnDate":[2023,8,1],"activatedByUsername":"Elias","activatedByFirstname":"Elias","activatedByLastname":"Yaa"},"savingsAccountId":420,"legalForm":{"id":1,"code":"legalFormType.person","value":"PERSON"},"groups":[],"clientNonPersonDetails":{"constitution":{"active":false,"mandatory":false},"mainBusinessLine":{"active":false,"mandatory":false}}}</gettenantres>
+    	<tenantaccounts>AccountsDto{id=6868, display_name='null', account_no='000006868', external_id='null', mobile_no='null', productName='Biashara Loan', productPrefix='BL', account_balance=6700.0, loan=true}</tenantaccounts>
+    	<accountbalance>6400.00</accountbalance>
+    	<processloan>BL 000006868</processloan>
+    	<account>000006868</account>
+    	<loanamount>6700.0</loanamount>
+    	<repaymentamount>300.00</repaymentamount>
+    	<excesspayment>0</excesspayment>
+    	<repaymentamount>300.00</repaymentamount>
+    	<loanrequest>loans/6868/transactions?command=repayment</loanrequest>
+    	<mpesadate>18 Jun 2024</mpesadate>
+    	<loanrequesttocbsreq>{bankNumber=mpesa, note=mpesa loan payment, checkNumber=25942168, paymentTypeId=2, dateFormat=dd MMMM yyyy, transactionAmount=300.00, locale=en, transactionDate=23 May 2025, accountNumber=000006868, routingCode=JANE, receiptNumber=SFI0TTNR3Z}</loanrequesttocbsreq>
+    	<loanrequesttocbsres>{"officeId":11,"clientId":420,"loanId":6868,"resourceId":906779,"changes":{"transactionDate":"23 May 2025","transactionAmount":"300.00","locale":"en","dateFormat":"dd MMMM yyyy","paymentTypeId":"2","note":"mpesa loan payment","accountNumber":"000006868","checkNumber":"25942168","routingCode":"JANE","receiptNumber":"SFI0TTNR3Z","bankNumber":"mpesa"}}</loanrequesttocbsres>
+    	<handleipnrequest>Success</handleipnrequest>
+    	<alertrequest>AlertRequest(smsId=0, mobileNo=254722676877, message=null, accountNo=000000420, clientNo=null, clientName=Brenda Mbuli Mulwa, messageType=LN, amount=300.00, balance=6400.00, receipt=SFI0TTNR3Z, detail=null, senderName=JANE, txnDate=18-06-2024 07:32:08, threshold=null, smsTemplate=null, officer=null, loanAmount=null, repaymentAmount=null, termFrequency=0, termCode=null, clientId=null, clientActive=false)</alertrequest>
+    	<alertreq>AlertRequest(smsId=0, mobileNo=254722676877, message=null, accountNo=000000420, clientNo=null, clientName=Brenda Mbuli Mulwa, messageType=LN, amount=300.00, balance=6400.00, receipt=SFI0TTNR3Z, detail=null, senderName=JANE, txnDate=18-06-2024 07:32:08, threshold=null, smsTemplate=null, officer=null, loanAmount=null, repaymentAmount=null, termFrequency=0, termCode=null, clientId=null, clientActive=false)</alertreq>
+    	<smsalert>===============================================SMS Sent to: 254722676877SMS Sent:  Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 6400.00. Thank you for being a Wonderful Customer.===============================================</smsalert>
+    	<smsalertreq>{"apikey":"207676228ef11c4df572fbff7fa34d76","pass_type":"plain","mobile":"254722676877","partnerID":"11333","message":"Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 6400.00. Thank you for being a Wonderful Customer.","shortcode":"WonderfulPL"}</smsalertreq>
+    	<smsreq>{"apikey":"207676228ef11c4df572fbff7fa34d76","pass_type":"plain","mobile":"254722676877","partnerID":"11333","message":"Dear Brenda, SFI0TTNR3Z confirmed. KES 300.00 paid to your loan on 18-06-2024 07:32:08. Loan balance is KES 6400.00. Thank you for being a Wonderful Customer.","shortcode":"WonderfulPL"}</smsreq>
+    	<smsallowed>false</smsallowed>
+    	<smssent>254722676877</smssent>
+    	<completed>====OUT===</completed>
+    	<lockreleased>25942168_SFI0TTNR3Z</lockreleased>
+    	<activelocks>0</activelocks>
+    	<duration>-16706 Ms</duration>
+    </exec>
+    </txn>
+</event>

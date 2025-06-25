@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.net.ssl.SSLContext;
@@ -29,26 +30,30 @@ import java.util.regex.Pattern;
 
 @Component
 public class AXWorker {
+    private final Environment env;
     private static final Logger logger = LoggerFactory.getLogger(AXWorker.class);
     private final DecimalFormat decimalFormat;
     private final Pattern holderPattern;
 
-    public String externalUrl = "https://evolve.wonderful.co.ke/fineract-provider/api/v1/";
-    public String tenantId = "default";
-    //    public String username = "Admin";
-//    public String password = "Ryl3q@#1";
-    public String username = "mifos";
-    public String password = "mifos123";
-    public String credentials = username + ":" + password;
+    public String externalUrl;
+    public String tenantId;
+    public String username;
+    public String password;
+    public String credentials;
     public int keySequence = 0;
     public String OTPKey;
 
     @Autowired
-    public AXWorker() {
-
+    public AXWorker(Environment env) {
+        this.env = env;
         this.decimalFormat = new DecimalFormat("#,##0.##");
         this.holderPattern = Pattern.compile("\\{.*?\\}");
         this.OTPKey = "01234567890";
+        this.username =  env.getProperty("ev.userName");
+        this.password =  env.getProperty("ev.password");
+        this.externalUrl =  env.getProperty("ev.url");
+        this.tenantId =  env.getProperty("ev.tenant");
+        this.credentials = this.username + ":" + this.password;
     }
 
     public String basicAuthToken() {
@@ -289,7 +294,7 @@ public class AXWorker {
         return !isBlank(text) ? text.replaceAll("\\s+", " ").trim() : text;
     }
 
-    private OkHttpClient getUnsafeOkHttpClient() {
+    public OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[]{
@@ -325,5 +330,33 @@ public class AXWorker {
         }
     }
 
+
+    public boolean hasSuffix(String clientId) {
+        return clientId.toLowerCase().endsWith("bl")
+                || clientId.toLowerCase().endsWith("el")
+                || clientId.toLowerCase().endsWith("em")
+                || clientId.toLowerCase().endsWith("sv")
+                || clientId.toLowerCase().endsWith("sb");
+    }
+
+    public String[] splitClientId(String clientId) {
+        String regex = "(\\d+)([a-zA-Z]+)";
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+        java.util.regex.Matcher matcher = pattern.matcher(clientId);
+
+        // Check if the pattern matches and extract parts
+        if (matcher.matches()) {
+            String numberPart = matcher.group(1); // Numeric part
+            String letterPart = matcher.group(2).toUpperCase(); // Alphabetic part
+            return new String[]{numberPart, letterPart};
+        }
+        return null;
+    }
+
+    public LocalDateTime DateConverter(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        return dateTime;
+    }
 
 }
